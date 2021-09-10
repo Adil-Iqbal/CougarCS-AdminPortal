@@ -15,9 +15,12 @@
   "author": "Adil Iqbal",
   "license": "MIT",
   "dependencies": {
+    "aws-sdk": "^2.986.0",
     "create-react-app": "^4.0.3",
     "express": "^4.17.1",
     "ts-node": "^10.2.1",
+    "winston": "^3.3.3",
+    "winston-cloudwatch": "^3.0.2",
     "yup": "^0.32.9"
   },
   "devDependencies": {
