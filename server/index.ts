@@ -1,18 +1,16 @@
-import express from 'express'
-import path from 'path'
+import express from 'express';
+import path from 'path';
+import router from './routes';
 
 const app = express();
 
-app.use(express.static(path.join(path.dirname(__dirname), 'client', 'build')));
+const reactBuildPath = path.join(path.dirname(__dirname), 'client', 'build');
+const reactIndexPath = path.join(reactBuildPath, 'index.html');
 
-app.get('/ping', (req, res) => {
-  return res.send('pong')
-})
+app.use(express.static(reactBuildPath));
 
-app.get('/', (req, res) => {
-  const reactPath = path.join(path.dirname(__dirname), 'client', 'build', 'index.html');
-  res.sendFile(reactPath);
-})
+app.get('/api', router);
+app.get('/', (req, res) => res.sendFile(reactIndexPath));
 
 app.listen(8080, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${8080}`);
