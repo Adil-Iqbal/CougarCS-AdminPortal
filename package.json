@@ -5,7 +5,8 @@
   "main": "server/index.js",
   "scripts": {
     "start": "nodemon server/index.ts",
-    "lint": "eslint \"./server/**\" --fix && eslint \"./logger/**\" --fix"
+    "lint": "npx prettier --write ./server/** && eslint \"./server/**\" && npx prettier --write ./logger/** && eslint \"./logger/**\"",
+    "prepare": "npx husky install"
   },
   "keywords": [
     "cougarcs",
@@ -18,7 +19,6 @@
   "dependencies": {
     "create-react-app": "^4.0.3",
     "express": "^4.17.1",
-    "ts-node": "^10.2.1",
     "winston": "^3.3.3",
     "winston-cloudwatch": "^3.0.2",
     "yup": "^0.32.9"
@@ -34,8 +34,24 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.0",
+    "lint-staged": "^11.1.2",
     "nodemon": "^2.0.12",
     "prettier": "^2.4.0",
+    "ts-node": "^10.2.1",
     "typescript": "^4.4.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "server/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ],
+    "logger/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ]
   }
 }

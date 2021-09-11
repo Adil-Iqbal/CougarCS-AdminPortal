@@ -17,6 +17,7 @@
         "prettier"
     ],
     "rules": {
+        "quotes": [2, "single", { "avoidEscape": true }],
         "import/extensions": [
             "error",
             "ignorePackages",
