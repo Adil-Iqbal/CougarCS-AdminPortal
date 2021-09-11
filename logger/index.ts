@@ -19,10 +19,7 @@ const cloudWatchTransport = new WinstonCloudwatch({
 const consoleTransport = new winston.transports.Console({ level: 'info' });
 
 winston.loggers.add('prod-logger', {
-  transports: [
-    cloudWatchTransport,
-    consoleTransport
-  ]
+  transports: [cloudWatchTransport, consoleTransport],
 });
 
 export default winston.loggers.get('prod-logger');
