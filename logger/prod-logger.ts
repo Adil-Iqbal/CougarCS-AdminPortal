@@ -21,19 +21,18 @@ const cloudWatchTransport = new WinstonCloudwatch({
   },
 });
 
-
 function createProdLogger(toFilePath: string) {
-    const relativeFilePath = path.relative(baseDir, toFilePath);
-    return winston.createLogger({
-      format: winston.format.combine(
-        winston.format.timestamp(),
-        winston.format.errors({ stack: true }),
-        winston.format.json()
-      ),
-      defaultMeta: { service: 'cougarcs-admin-portal', file: relativeFilePath },
-      level: process.env.LOG_LEVEL || 'info',
-      transports: [cloudWatchTransport],
-    });
-  };
+  const relativeFilePath = path.relative(baseDir, toFilePath);
+  return winston.createLogger({
+    format: winston.format.combine(
+      winston.format.timestamp(),
+      winston.format.errors({ stack: true }),
+      winston.format.json()
+    ),
+    defaultMeta: { service: 'cougarcs-admin-portal', file: relativeFilePath },
+    level: process.env.LOG_LEVEL || 'info',
+    transports: [cloudWatchTransport],
+  });
+}
 
 export default createProdLogger;
