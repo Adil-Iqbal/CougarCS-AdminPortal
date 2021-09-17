@@ -4,9 +4,7 @@ import devLoggerFactory from './dev-logger';
 import prodLoggerFactory from './prod-logger';
 dotenv.config();
 
-declare type LogFactory = (
-  workingDirectory: string
-) => (toFilePath: string) => winston.Logger;
+declare type LogFactory = (toFilePath: string) => winston.Logger;
 
 let loggerFactory: LogFactory;
 

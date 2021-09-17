@@ -3,14 +3,11 @@ import winston from 'winston';
 
 const baseDir = path.dirname(path.dirname(__filename));
 
-function devLoggerFactory(workingDirectory: string) {
-  const fromFilePath = path.resolve(baseDir, workingDirectory);
-
-  return function createDevLogger(toFilePath: string) {
-    const relativeFilePath = path.relative(fromFilePath, toFilePath);
+function createDevLogger(toFilePath: string) {
+    const relativeFilePath = path.relative(baseDir, toFilePath);
     const logFormat = winston.format.printf(
       ({ level, message, timestamp, stack }) =>
-        `${timestamp} [${relativeFilePath}] ${level.toUpperCase()}: ${
+        `[${relativeFilePath}] ${timestamp} ${level}: ${
           stack || message
         }`
     );
@@ -25,6 +22,5 @@ function devLoggerFactory(workingDirectory: string) {
       transports: [new winston.transports.Console()],
     });
   };
-}
 
-export default devLoggerFactory;
+export default createDevLogger;

@@ -1,9 +1,10 @@
 import express from 'express';
 import path from 'path';
 import router from './routes';
-import createLogger from './logger';
+import createLogger from '../logger';
 
 const logger = createLogger(__filename);
+logger.info("We did it!")
 const port = process.env.PORT || 8080;
 
 const app = express();

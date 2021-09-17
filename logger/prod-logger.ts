@@ -21,11 +21,9 @@ const cloudWatchTransport = new WinstonCloudwatch({
   },
 });
 
-function prodLoggerFactory(workingDirectory: string) {
-  const fromFilePath = path.resolve(baseDir, workingDirectory);
 
-  return function createProdLogger(toFilePath: string) {
-    const relativeFilePath = path.relative(fromFilePath, toFilePath);
+function createProdLogger(toFilePath: string) {
+    const relativeFilePath = path.relative(baseDir, toFilePath);
     return winston.createLogger({
       format: winston.format.combine(
         winston.format.timestamp(),
@@ -37,6 +35,5 @@ function prodLoggerFactory(workingDirectory: string) {
       transports: [cloudWatchTransport],
     });
   };
-}
 
-export default prodLoggerFactory;
+export default createProdLogger;
