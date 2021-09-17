@@ -1,13 +1,14 @@
 import { Router } from 'express';
-import createLogger from '../../logger';
-
-const logger = createLogger(__filename);
+import apiRouter from './auth';
+import APIError from '../error/api-error';
 
 const router = Router();
 
-router.get('/', (request, response) => {
-  logger.info("HelloWorld!");
-  response.send('Hello world!');
+router.get('/', (req, res, next) => {
+  const err = APIError.badRequest('wrong!');
+  next(err);
 });
+
+router.use('/auth', apiRouter);
 
 export default router;

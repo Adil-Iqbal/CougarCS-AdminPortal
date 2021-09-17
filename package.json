@@ -5,7 +5,7 @@
   "main": "server/index.js",
   "scripts": {
     "start": "cd client && npm run build && cd .. && nodemon server/index.ts",
-    "lint": "npx prettier --write ./server/** && eslint \"./server/**\" && npx prettier --write ./logger/** && eslint \"./logger/**\"",
+    "lint": "npx prettier --write ./server/** && eslint \"./server/**\" --fix && eslint \"./server/**\" && npx prettier --write ./logger/** && eslint \"./logger/**\" --fix && eslint \"./logger/**\"",
     "prepare": "npx husky install"
   },
   "keywords": [
@@ -21,6 +21,7 @@
     "create-react-app": "^4.0.3",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "passport": "^0.4.1",
     "winston": "^3.3.3",
     "winston-cloudwatch": "^3.0.2",
     "yup": "^0.32.9"
@@ -28,6 +29,7 @@
   "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/node": "^16.9.1",
+    "@types/passport": "^1.0.7",
     "@types/react": "^17.0.20",
     "@typescript-eslint/eslint-plugin": "^4.31.0",
     "@typescript-eslint/parser": "^4.31.0",
