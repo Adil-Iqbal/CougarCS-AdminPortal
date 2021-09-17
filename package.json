@@ -4,7 +4,7 @@
   "description": "admin portal for cougarcs",
   "main": "server/index.js",
   "scripts": {
-    "start": "nodemon server/index.ts",
+    "start": "cd client && npm run build && cd .. && nodemon server/index.ts",
     "lint": "npx prettier --write ./server/** && eslint \"./server/**\" && npx prettier --write ./logger/** && eslint \"./logger/**\"",
     "prepare": "npx husky install"
   },
@@ -17,7 +17,9 @@
   "author": "Adil Iqbal",
   "license": "MIT",
   "dependencies": {
+    "aws-sdk": "^2.990.0",
     "create-react-app": "^4.0.3",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "winston": "^3.3.3",
     "winston-cloudwatch": "^3.0.2",

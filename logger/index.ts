@@ -1,25 +1,16 @@
+import dotenv from 'dotenv';
 import winston from 'winston';
-import WinstonCloudwatch from 'winston-cloudwatch';
-import crypto from 'crypto';
+import devLoggerFactory from './dev-logger';
+import prodLoggerFactory from './prod-logger';
+dotenv.config();
 
-const startTime = new Date().toISOString();
+declare type LogFactory = (
+  workingDirectory: string
+) => (toFilePath: string) => winston.Logger;
 
-const cloudWatchTransport = new WinstonCloudwatch({
-  name: 'cougarcs-admin-portal',
-  logGroupName: 'admin-portal',
-  logStreamName() {
-    const date = new Date().toISOString().split('T')[0];
-    return `prod-${date}-${crypto
-      .createHash('md5')
-      .update(startTime)
-      .digest('hex')}`;
-  },
-});
+let loggerFactory: LogFactory;
 
-const consoleTransport = new winston.transports.Console({ level: 'info' });
+if (process.env.NODE_ENV?.startsWith('dev')) loggerFactory = devLoggerFactory;
+else loggerFactory = prodLoggerFactory;
 
-winston.loggers.add('prod-logger', {
-  transports: [cloudWatchTransport, consoleTransport],
-});
-
-export default winston.loggers.get('prod-logger');
+export default loggerFactory;

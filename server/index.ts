@@ -1,6 +1,10 @@
 import express from 'express';
 import path from 'path';
 import router from './routes';
+import createLogger from './logger';
+
+const logger = createLogger(__filename);
+const port = process.env.PORT || 8080;
 
 const app = express();
 
@@ -12,6 +16,6 @@ app.use(express.static(reactBuildPath));
 app.get('/', (req, res) => res.sendFile(reactIndexPath));
 app.get('/api', router);
 
-app.listen(8080, () => {
-  console.log(`⚡️[server]: Server is running at https://localhost:${8080}`);
+app.listen(port, () => {
+  logger.info(`Server is running on port ${port}`);
 });
