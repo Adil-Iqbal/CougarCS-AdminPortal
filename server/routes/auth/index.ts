@@ -1,8 +1,11 @@
 import { Router } from 'express';
-import passport from 'passport';
+import APIError from '../../error/api-error';
+import googleRouter from './google';
 
 const router = Router();
 
-router.get('/', passport.authenticate('google', { failureRedirect: '/' }));
+router.get('/', (req, res, next) => next(APIError.forbidden()));
+
+router.use('/google', googleRouter);
 
 export default router;
