@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import apiRouter from './auth';
-import APIError from '../error/api-error';
+import forbiddenRoute from '../controllers/util';
 
 const router = Router();
 
-router.get('/', (req, res, next) => next(APIError.forbidden()));
+router.get('/', forbiddenRoute);
 
 router.use('/auth', apiRouter);
 

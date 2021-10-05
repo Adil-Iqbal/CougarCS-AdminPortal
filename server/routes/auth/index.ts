@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import APIError from '../../error/api-error';
 import googleRouter from './google';
+import forbiddenRoute from '../../controllers/util';
 
 const router = Router();
 
-router.get('/', (req, res, next) => next(APIError.forbidden()));
+router.get('/', forbiddenRoute);
 
 router.use('/google', googleRouter);
 
